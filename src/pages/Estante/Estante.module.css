@@ -1,0 +1,20 @@
+.container {
+  padding: 20px;
+  background-color: #b3dee2;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.container_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.estante {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+}

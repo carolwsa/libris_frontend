@@ -1,0 +1,36 @@
+button {
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 4px 2px;
+  width: 150px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.b_v1 {
+  background-color: #ee6c4d;
+}
+
+.b_v1:hover {
+  background-color: #f9f7f3;
+}
+
+.b_v2 {
+  font-size: 0.9rem;
+  padding: 10px 10px;
+}
+
+.b_v2:hover {
+  background-color: #f9f7f3;
+}
+
+.b_v3 {
+  background-color: #f9f7f3;
+}

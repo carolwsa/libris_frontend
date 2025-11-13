@@ -1,0 +1,24 @@
+label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  min-width: 330px;
+  align-items: center;
+  text-align: left;
+}
+
+input {
+  margin: 9px;
+  border-radius: 30px;
+  border: none;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}

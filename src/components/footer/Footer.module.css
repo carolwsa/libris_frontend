@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  background-color: #e7ecef;
+  border-radius: 40px;
+  margin: 1rem;
+}
+
+/* Responsividade para tablets */
+@media (max-width: 768px) {
+  .footer {
+    height: 60px;
+    margin: 0.5rem;
+    border-radius: 20px;
+  }
+}
+
+/* Responsividade para celulares */
+@media (max-width: 480px) {
+  .footer {
+    height: 50px;
+    margin: 0.25rem;
+    border-radius: 15px;
+  }
+}
