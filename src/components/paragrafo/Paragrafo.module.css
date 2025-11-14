@@ -20,13 +20,14 @@ p {
 }
 
 .p_descricao {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #282727;
 }
 
 .p_padrao {
-  font-size: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .p_error {

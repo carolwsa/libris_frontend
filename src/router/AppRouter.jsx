@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "../pages/Login/Login";
 import Estante from "../pages/Estante/Estante";
 import CadastroLivro from "../pages/CadastroLivro/CadastroLivro";
+import EditarLivro from "../pages/EditarLivro";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/footer";
 
@@ -31,6 +32,16 @@ const AppRouter = () => {
             <PrivateRoute>
               <Header />
               <CadastroLivro />
+              <Footer />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/editarLivro/:id"
+          element={
+            <PrivateRoute>
+              <Header />
+              <EditarLivro />
               <Footer />
             </PrivateRoute>
           }

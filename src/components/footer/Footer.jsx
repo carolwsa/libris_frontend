@@ -4,7 +4,7 @@ import style from "./Footer.module.css";
 const Footer = () => {
   return (
     <footer className={style.footer}>
-      <Paragrafo type="descricao" children="© Ana Carolina da Silva | 2025" />
+      <Paragrafo type="" children="© Ana Carolina da Silva | 2025" />
     </footer>
   );
 };

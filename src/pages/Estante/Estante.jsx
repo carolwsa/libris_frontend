@@ -40,6 +40,14 @@ const Estante = () => {
     navigate("/cadastroLivro");
   };
 
+  const handleDeleteLivro = (livroId) => {
+    setLivros(livros.filter(livro => livro._id !== livroId));
+  };
+
+  const handleEditLivro = (livro) => {
+    navigate(`/editarLivro/${livro._id}`, { state: { livro } });
+  };
+
   return (
     <section className={style.container}>
       <div className={style.container_div}>
@@ -68,6 +76,8 @@ const Estante = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         livro={selectedLivro}
+        onDelete={handleDeleteLivro}
+        onEdit={handleEditLivro}
       />
     </section>
   );

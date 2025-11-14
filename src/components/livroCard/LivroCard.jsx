@@ -6,7 +6,7 @@ const LivroCard = ({ livro, onClick }) => {
   return (
     <div className={styles.card} onClick={() => onClick(livro)}>
       <Icones children={livro.img} type={"capa"} alt={livro.titulo} />
-      <Paragrafo>{livro.titulo}</Paragrafo>
+      <Paragrafo type={"descricao"}>{livro.titulo}</Paragrafo>
     </div>
   );
 };

@@ -11,6 +11,7 @@
 .img_capa {
   width: 185px;
   height: 280px;
+  border-radius: 10px;
 }
 
 .img_add {
