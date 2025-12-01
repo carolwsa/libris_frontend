@@ -6,11 +6,13 @@ import Modal from "../../components/modal/Modal";
 import add from "../../assets/add.png";
 import style from "./Estante.module.css";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/header/Header";
 
 const Estante = () => {
   const [livros, setLivros] = useState([]);
   const [selectedLivro, setSelectedLivro] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userID, setUserID] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -29,6 +31,13 @@ const Estante = () => {
       });
   }, []);
 
+  useEffect(() => {
+    if (livros.length > 0) {
+      const userId = livros[0]?.userId;
+      setUserID(userId || null);
+    }
+  }, [livros]);
+
   const handleLivroClick = (livro) => {
     setSelectedLivro(livro);
     setIsModalOpen(true);
@@ -41,45 +50,49 @@ const Estante = () => {
   };
 
   const handleDeleteLivro = (livroId) => {
-    setLivros(livros.filter(livro => livro._id !== livroId));
+    setLivros(livros.filter((livro) => livro._id !== livroId));
   };
 
   const handleEditLivro = (livro) => {
     navigate(`/editarLivro/${livro._id}`, { state: { livro } });
   };
+  console.log(userID);
 
   return (
-    <section className={style.container}>
-      <div className={style.container_div}>
-        <Paragrafo type="titulo">Meus Livros</Paragrafo>
-        <Icones type="add" onClick={handleAddClick}>
-          {add}
-        </Icones>
-      </div>
+    <>
+      <Header userId={userID} />
+      <section className={style.container}>
+        <div className={style.container_div}>
+          <Paragrafo type="titulo">Meus Livros</Paragrafo>
+          <Icones type="add" onClick={handleAddClick}>
+            {add}
+          </Icones>
+        </div>
 
-      <div className={style.estante}>
-        {Array.isArray(livros) && livros.length === 0 && (
-          <Paragrafo type="descricao">Nenhum livro encontrado</Paragrafo>
-        )}
+        <div className={style.estante}>
+          {Array.isArray(livros) && livros.length === 0 && (
+            <Paragrafo type="descricao">Nenhum livro encontrado</Paragrafo>
+          )}
 
-        {Array.isArray(livros) &&
-          livros.map((livro) => (
-            <LivroCard
-              key={livro.id}
-              livro={livro}
-              onClick={handleLivroClick}
-            />
-          ))}
-      </div>
+          {Array.isArray(livros) &&
+            livros.map((livro) => (
+              <LivroCard
+                key={livro.id}
+                livro={livro}
+                onClick={handleLivroClick}
+              />
+            ))}
+        </div>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        livro={selectedLivro}
-        onDelete={handleDeleteLivro}
-        onEdit={handleEditLivro}
-      />
-    </section>
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          livro={selectedLivro}
+          onDelete={handleDeleteLivro}
+          onEdit={handleEditLivro}
+        />
+      </section>
+    </>
   );
 };
 

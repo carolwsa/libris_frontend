@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Botao from "../../components/button/Botao";
-import Label from "../../components/label/Label";
-import Paragrafo from "../../components/paragrafo/Paragrafo";
-import styles from "./Login.module.css";
-import style from "./Login.module.css";
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/footer";
+import style from "./Login/Login.module.css";
+import Paragrafo from "../components/paragrafo/Paragrafo";
+import Header from "../components/header/Header";
+import Label from "../components/label/Label";
+import Botao from "../components/button/Botao";
+import Footer from "../components/footer/footer";
 
-const Login = () => {
+const CadastroUsuario = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [nome, setNome] = useState("");
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState("");
 
@@ -24,12 +24,12 @@ const Login = () => {
     }
   }, [erro]);
 
-  const handleCadastro = () => {
-    navigate("/cadastroUsuario");
+  const handleCancelar = () => {
+    navigate("/login");
   };
 
-  const handleLogin = async () => {
-    if (!email || !senha) {
+  const handleCadastrar = async () => {
+    if (!email || !senha || !nome) {
       setErro("Preencha todos os campos!");
       return;
     }
@@ -38,22 +38,20 @@ const Login = () => {
     setErro("");
 
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch("http://localhost:3000/cadastro", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, senha }),
+        body: JSON.stringify({ nome, senha, email }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("usuario", JSON.stringify(data.usuario));
-        navigate("/estante");
+        navigate("/login");
       } else {
-        setErro(data.message || "Verifique suas credenciais!");
+        setErro(data.message || "Erro ao cadastrar usuário!");
       }
     } catch (error) {
       setErro("Erro de conexão com o servidor");
@@ -66,11 +64,20 @@ const Login = () => {
   return (
     <>
       <Header type="login" />
-      <div className={styles.container}>
+      <div className={style.container}>
         <section>
-          <Paragrafo type="titulo">Login</Paragrafo>
+          <Paragrafo type="titulo">Cadastro</Paragrafo>
 
           <div className={style.div_label}>
+            <Label
+              type="text"
+              text="Digite seu nome"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            >
+              Nome
+            </Label>
+
             <Label
               type="email"
               text="Digite seu email"
@@ -96,17 +103,13 @@ const Login = () => {
             </Paragrafo>
           )}
 
-          <div className={style.div_botoes}>
-            <Botao type="v1" onClick={handleLogin} disabled={loading}>
-              {loading ? "Entrando..." : "Entrar"}
+          <div className={style.div_botoes_cadastro}>
+            <Botao type="v1" onClick={handleCadastrar} disabled={loading}>
+              {loading ? "Salvando..." : "Salvar"}
             </Botao>
-
-            <div className={style.div_cadastro}>
-              <Paragrafo type="descricao">Ainda não tem uma conta?</Paragrafo>
-              <Botao type={"v2"} onClick={handleCadastro}>
-                Cadastre-se
-              </Botao>
-            </div>
+            <Botao type={"v3"} onClick={handleCancelar}>
+              Cancelar
+            </Botao>
           </div>
         </section>
       </div>
@@ -115,4 +118,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default CadastroUsuario;

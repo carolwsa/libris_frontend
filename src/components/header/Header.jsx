@@ -5,13 +5,19 @@ import Paragrafo from "../paragrafo/Paragrafo";
 import perfil from "../../assets/user.png";
 import style from "./Header.module.css";
 
-const Header = ({ type }) => {
+const Header = ({ type, userId }) => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("usuario");
-    navigate("/login");
+  const handlePerfil = () => {
+    try {
+      if (userId) {
+        navigate(`/perfil/${userId}`);
+      } else {
+        console.error("ID do usuário não encontrado");
+      }
+    } catch (error) {
+      console.error("Erro ao acessar o usuário.", error);
+    }
   };
 
   return (
@@ -19,13 +25,18 @@ const Header = ({ type }) => {
       <Icones children={logo} type={"logo"} />
 
       {type === "login" ? (
-        <div className={style.container}>
+        <div className={style.container} onClick={() => navigate("/login")}>
           <Paragrafo children={"Login"} type={"paragrafo"} />
         </div>
       ) : (
         <div className={style.container}>
-          <Paragrafo children={"Minha estante"} type={"paragrafo"} />
-          <div onClick={handleLogout} style={{cursor: 'pointer'}}>
+          <div
+            onClick={() => navigate("/estante")}
+            style={{ cursor: "pointer" }}
+          >
+            <Paragrafo children={"Minha estante"} type={"paragrafo"} />
+          </div>
+          <div onClick={handlePerfil} style={{ cursor: "pointer" }}>
             <Icones children={perfil} type={"perfil"} />
           </div>
         </div>
