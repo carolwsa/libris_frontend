@@ -67,7 +67,7 @@ const Login = () => {
     <>
       <Header type="login" />
       <div className={styles.container}>
-        <section>
+        <section className={styles.section_login}>
           <Paragrafo type="titulo">Login</Paragrafo>
 
           <div className={style.div_label}>

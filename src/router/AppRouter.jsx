@@ -7,6 +7,7 @@ import PerfilUsuario from "../pages/PerfilUsuario";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/footer";
 import CadastroUsuario from "../pages/CadastroUsuario";
+import Home from "../pages/Home/Home";
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -17,6 +18,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastroUsuario" element={<CadastroUsuario />} />
         <Route
